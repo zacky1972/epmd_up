@@ -31,3 +31,12 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+    - name: Set up Elixir
+      uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+      with:
+        elixir-version: '1.15.8'
+        otp-version: '26.2.5.12'
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run tests
+      run: mix test
