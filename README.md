@@ -23,3 +23,10 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/epmd_up>.
 
+## Tested Platforms
+
+* Ubuntu 22.04
+* Elixir 1.18 / OTP 28
+* Elixir 1.17 / OTP 27
+* Elixir 1.16 / OTP 26
+* Elixir 1.15 / OTP 25
