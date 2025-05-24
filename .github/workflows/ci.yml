@@ -41,6 +41,8 @@ jobs:
       run: mix deps.get
     - name: Check format (Elixir 1.18 with OTP 28)
       run: mix format --check-formatted --migrate
+    - name: Check by the new type system (Elixir 1.18 with OTP 28)
+      run: mix compile --all-warnings --warnings-as-errors --no-compile
     - name: Run tests (Elixir 1.18 with OTP 28)
       run: mix test
 
