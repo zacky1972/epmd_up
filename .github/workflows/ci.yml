@@ -27,12 +27,9 @@ jobs:
       uses: jdx/mise-action@v2.2.2
       with:
         mise_toml: |
-          [elixir]
-          elixir-version = '1.18.4'
-          otp-version = '28.0'
-          mix-version = '1.18.4'
-          mix-env = 'test'
-          cache = false
+          [tools]
+          erlang = '28.0'
+          elixir = '1.18.4'
     #- name: Set up Elixir 1.18 with OTP 28
     #  uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
     #  with:
