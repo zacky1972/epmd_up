@@ -39,6 +39,8 @@ jobs:
     #    otp-version: '28.0'
     - name: Install dependencies (Elixir 1.18 with OTP 28)
       run: mix deps.get
+    - name: Check format (Elixir 1.18 with OTP 28)
+      run: mix format --check-formatted --migrate
     - name: Run tests (Elixir 1.18 with OTP 28)
       run: mix test
 
