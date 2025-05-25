@@ -21,6 +21,6 @@ defmodule EpmdUp do
     case :net_adm.names() do
       {:ok, _} -> true
       {:error, _} -> false
-    end    
+    end
   end
 end
