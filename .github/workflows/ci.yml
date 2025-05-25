@@ -53,6 +53,8 @@ jobs:
       run: mix compile --all-warnings --warnings-as-errors --no-compile
     - name: Run tests
       run: mix test
+    - name: Run Credo
+      run: mix credo --strict
 
   build-and-test-ubuntu:
     strategy:
