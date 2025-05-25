@@ -14,60 +14,106 @@ on:
 permissions:
   contents: read
 
-jobs:
-  build:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
-    name: Build and test
-    runs-on: ubuntu-22.04
+jobs:
+  build-and-test-latest:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            elixir-version: 1.18.4
+            otp-version: 27.3.4
+
+    name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Elixir 1.15 with OTP 25
+    - name: Set up Elixir
       uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+      id: setup-beam
       with:
-        elixir-version: '1.15.8'
-        otp-version: '25.3.2.21'
-    - name: Install dependencies (Elixir 1.15 with OTP 25)
+        elixir-version: ${{ matrix.elixir-version }}
+        otp-version: ${{ matrix.otp-version }}
+    - name: Install dependencies
       run: mix deps.get
-    - name: Run tests (Elixir 1.15 with OTP 25)
+    - name: Check format
+      run: mix format --check-formatted --migrate
+    - name: Check by the new type system
+      run: mix compile --all-warnings --warnings-as-errors --no-compile
+    - name: Run tests
       run: mix test
 
-    - name: Set up Elixir 1.16 with OTP 26
+  build-and-test-ubuntu:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            elixir-version: 1.16.3
+            otp-version: 26.2.5.12
+          - os: ubuntu-22.04
+            elixir-version: 1.15.8
+            otp-version: 25.3.2.12
+
+    name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
+    needs: build-and-test-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Elixir
       uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+      id: setup-beam
       with:
-        elixir-version: '1.16.3'
-        otp-version: '26.2.5.12'
-    - name: Install dependencies (Elixir 1.16 with OTP 26)
+        elixir-version: ${{ matrix.elixir-version }}
+        otp-version: ${{ matrix.otp-version }}
+    - name: Install dependencies
       run: mix deps.get
-    - name: Run tests (Elixir 1.16 with OTP 26)
+    - name: Run tests
       run: mix test
 
-    - name: Set up Elixir 1.17 with OTP 27
-      uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
-      with:
-        elixir-version: '1.17.3'
-        otp-version: '27.3.4'
-    - name: Install dependencies (Elixir 1.17 with OTP 27)
-      run: mix deps.get
-    - name: Run tests (Elixir 1.17 with OTP 27)
-      run: mix test
+  build-and-test-windows:
+    strategy:
+      matrix:
+        include:
+          - os: windows-2022
+            elixir-version: 1.18.4
+            otp-version: 27.3.4
+          - os: windows-2019
+            elixir-version: 1.18.4
+            otp-version: 27.3.4
 
-    - name: Set up Elixir 1.18 with OTP 28 by mise
-      uses: jdx/mise-action@v2.2.2
+    name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
+    needs: build-and-test-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Elixir
+      uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+      id: setup-beam-windows
       with:
-        mise_toml: |
-          [elixir]
-          elixir-version = '1.18.4'
-          otp-version = '28.0'
-          mix-version = '1.18.4'
-          mix-env = 'test'
-    #- name: Set up Elixir 1.18 with OTP 28
-    #  uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
-    #  with:
-    #    elixir-version: '1.18.4'
-    #    otp-version: '28.0'
-    - name: Install dependencies (Elixir 1.18 with OTP 28)
+        elixir-version: ${{ matrix.elixir-version }}
+        otp-version: ${{ matrix.otp-version }}
+    - name: Install dependencies
       run: mix deps.get
-    - name: Run tests (Elixir 1.18 with OTP 28)
+    - name: Run tests
       run: mix test
