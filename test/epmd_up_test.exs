@@ -4,7 +4,7 @@ defmodule EpmdUpTest do
 
   describe "active?" do
     test "completes without raising an exception" do
-      r = EpmdUp.active?
+      r = EpmdUp.active?()
       assert r == true || r == false
     end
   end
