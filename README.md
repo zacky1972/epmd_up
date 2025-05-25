@@ -8,8 +8,7 @@ EpmdUp provides functionality to verify the status of `epmd`, which is a critica
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `epmd_up` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `epmd_up` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
