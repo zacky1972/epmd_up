@@ -10,6 +10,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - '**/*.md'
 
 permissions:
   contents: read
@@ -56,6 +58,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: ubuntu-22.04
+            elixir-version: 1.17.3
+            otp-version: 27.3.4
           - os: ubuntu-22.04
             elixir-version: 1.16.3
             otp-version: 26.2.5.12
