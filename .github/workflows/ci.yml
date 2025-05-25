@@ -23,25 +23,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Elixir 1.18 with OTP 28 by mise
-      uses: jdx/mise-action@v2.2.2
-      with:
-        mise_toml: |
-          [tools]
-          erlang = '28.0'
-          elixir = '1.18.4'
-    #- name: Set up Elixir 1.18 with OTP 28
-    #  uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+    #- name: Set up Elixir 1.18 with OTP 28 by mise
+    #  uses: jdx/mise-action@v2.2.2
     #  with:
-    #    elixir-version: '1.18.4'
-    #    otp-version: '28.0'
-    - name: Install dependencies (Elixir 1.18 with OTP 28)
+    #    mise_toml: |
+    #      [tools]
+    #      erlang = '28.0'
+    #      elixir = '1.18.4'
+    - name: Set up Elixir 1.18 with OTP 27
+      uses: erlef/setup-beam@cc72a5b176d1973f6c4326e756645266650ddccb
+      with:
+        elixir-version: '1.18.4'
+        otp-version: '27.3.4'
+    - name: Install dependencies (Elixir 1.18 with OTP 27)
       run: mix deps.get
-    - name: Check format (Elixir 1.18 with OTP 28)
+    - name: Check format (Elixir 1.18 with OTP 27)
       run: mix format --check-formatted --migrate
-    - name: Check by the new type system (Elixir 1.18 with OTP 28)
+    - name: Check by the new type system (Elixir 1.18 with OTP 27)
       run: mix compile --all-warnings --warnings-as-errors --no-compile
-    - name: Run tests (Elixir 1.18 with OTP 28)
+    - name: Run tests (Elixir 1.18 with OTP 27)
       run: mix test
 
     - name: Set up Elixir 1.17 with OTP 27
