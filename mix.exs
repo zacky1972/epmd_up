@@ -1,6 +1,8 @@
 defmodule EpmdUp.MixProject do
   use Mix.Project
 
+  @source_url "http://github.com/zacky1972/epmd_up"
+
   def project do
     [
       app: :epmd_up,
@@ -11,8 +13,12 @@ defmodule EpmdUp.MixProject do
 
       # Docs
       name: "EpmdUp",
-      source_url: "http://github.com/zacky1972/epmd_up",
-      docs: &docs/0
+      source_url: @source_url,
+      docs: &docs/0,
+
+      # Hex
+      description: description(),
+      package: package()
     ]
   end
 
@@ -36,7 +42,18 @@ defmodule EpmdUp.MixProject do
   defp docs do
     [
       main: "EpmdUp",
-      extras: ["README.md"]
+      extras: ["README.md", "LICENSE"]
+    ]
+  end
+
+  defp description do
+    "EpmdUp: A simple Elixir module to check if the Erlang Port Mapper Daemon (epmd) is running."
+  end
+
+  defp package do
+    [
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => @source_url}
     ]
   end
 end
