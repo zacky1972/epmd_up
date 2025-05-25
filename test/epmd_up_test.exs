@@ -2,9 +2,9 @@ defmodule EpmdUpTest do
   use ExUnit.Case
   doctest EpmdUp
 
-  describe "is_active?" do
+  describe "active?" do
     test "completes without raising an exception" do
-      r = EpmdUp.is_active?()
+      r = EpmdUp.active?
       assert r == true || r == false
     end
   end

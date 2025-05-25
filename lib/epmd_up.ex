@@ -16,8 +16,8 @@ defmodule EpmdUp do
     * `true` - if `epmd` is active and accepting connections
     * `false` - if `epmd` is not running or not accepting connections
   """
-  @spec is_active?() :: boolean()
-  def is_active?() do
+  @spec active?() :: boolean()
+  def active? do
     case :net_adm.names() do
       {:ok, _} -> true
       {:error, _} -> false
