@@ -55,7 +55,9 @@ jobs:
       run: mix test
     - name: Run Credo
       run: mix credo --strict
-
+    - name: Check documents
+      run: mix docs --warning-as-errors
+      
   build-and-test-ubuntu:
     strategy:
       matrix:
