@@ -14,11 +14,11 @@ defmodule EpmdUpTest do
       refute EpmdUp.find_epmd_executable() == nil
     end
   end
-  
+
   describe "activate and active?" do
     test "active? after activate" do
       assert EpmdUp.activate() == :ok
-      assert EpmdUp.active?() 
+      assert EpmdUp.active?()
     end
   end
 end

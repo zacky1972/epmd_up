@@ -11,11 +11,13 @@ defmodule EpmdUp do
   @spec activate() :: :ok | {:error, term()}
   def activate() do
     case active?() do
-      true -> :ok
+      true ->
+        :ok
 
-      _ -> 
+      _ ->
         case find_epmd_executable() do
-          nil -> {:error, "Not found empd"}
+          nil ->
+            {:error, "Not found empd"}
 
           epmd_cmd ->
             spawn(fn -> launch_epmd(epmd_cmd) end)
@@ -56,7 +58,7 @@ defmodule EpmdUp do
 
   defp launch_epmd(epmd_cmd) do
     case System.cmd(epmd_cmd, [], parallelism: true) do
-      {result, 0} -> 
+      {result, 0} ->
         Logger.info("epmd: #{result}")
         :ok
 
