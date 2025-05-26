@@ -9,7 +9,7 @@ defmodule EpmdUp do
   Starts the Erlang Port Mapper Daemon (`epmd`) if it's not already running.
   """
   @spec activate() :: :ok | {:error, term()}
-  def activate() do
+  def activate do
     case active?() do
       true -> :ok
       _ -> start_epmd()
@@ -45,7 +45,7 @@ defmodule EpmdUp do
     System.find_executable("epmd")
   end
 
-  defp start_epmd() do
+  defp start_epmd do
     case find_epmd_executable() do
       nil ->
         {:error, "Not found empd"}
