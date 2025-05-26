@@ -6,7 +6,7 @@ defmodule EpmdUp.MixProject do
   def project do
     [
       app: :epmd_up,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -47,7 +47,7 @@ defmodule EpmdUp.MixProject do
   end
 
   defp description do
-    "EpmdUp: A simple Elixir module to check if the Erlang Port Mapper Daemon (epmd) is running."
+    "EpmdUp: A simple Elixir module to check and manage the Erlang Port Mapper Daemon (epmd)."
   end
 
   defp package do
