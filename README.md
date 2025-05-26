@@ -8,6 +8,7 @@ EpmdUp provides functionality to verify the status and location of `epmd`, which
 
 ## Features
 
+  * `activate/0`: Starts `epmd` if it's not already running.
   * `active?/0`: Check if `epmd` is active and accepting connections
   * `find_epmd_executable/0`: Find the full path of the `epmd` executable in the system
   * Cross-platform support (Linux, macOS, Windows)
