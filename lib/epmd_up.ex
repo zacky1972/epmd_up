@@ -11,19 +11,8 @@ defmodule EpmdUp do
   @spec activate() :: :ok | {:error, term()}
   def activate() do
     case active?() do
-      true ->
-        :ok
-
-      _ ->
-        case find_epmd_executable() do
-          nil ->
-            {:error, "Not found empd"}
-
-          epmd_cmd ->
-            spawn(fn -> launch_epmd(epmd_cmd) end)
-            Logger.info("waiting launching epmd...")
-            wait_launching_epmd(5)
-        end
+      true -> :ok
+      _ -> start_epmd()
     end
   end
 
@@ -56,13 +45,25 @@ defmodule EpmdUp do
     System.find_executable("epmd")
   end
 
+  defp start_epmd() do
+    case find_epmd_executable() do
+      nil ->
+        {:error, "Not found empd"}
+
+      epmd_cmd ->
+        spawn(fn -> launch_epmd(epmd_cmd) end)
+        Logger.info("waiting launching epmd...")
+        wait_launching_epmd(5)
+    end
+  end
+
   defp launch_epmd(epmd_cmd) do
     case System.cmd(epmd_cmd, [], parallelism: true) do
       {result, 0} ->
         Logger.info("epmd: #{result}")
         :ok
 
-      {result, exit_code} ->
+      {_, exit_code} ->
         Logger.info("epmd: error_code: #{exit_code}")
         {:error, exit_code}
     end
