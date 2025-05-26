@@ -5,6 +5,9 @@ defmodule EpmdUp do
 
   require Logger
 
+  @epmd_port 4369
+  @kill_req <<0, 1, 107>>
+
   @doc """
   Starts the Erlang Port Mapper Daemon (`epmd`) if it's not already running.
   """
@@ -36,6 +39,19 @@ defmodule EpmdUp do
   end
 
   @doc """
+  Stops the Erlang Port Mapper Daemon (`epmd`) 
+  using [Kill EPMD](https://www.erlang.org/doc/apps/erts/erl_dist_protocol.html#kill-epmd) 
+  if it's running
+  """
+  @spec deactivate() :: :ok | {:error, term()}
+  def deactivate do
+    case active?() do
+      false -> :ok
+      _ -> stop_epmd()
+    end
+  end
+
+  @doc """
   Finds the full path of the Erlang Port Mapper Daemon (`epmd`) executable in the system.
 
   Returns `nil` if the executable cannot be found in the system's PATH.
@@ -54,6 +70,19 @@ defmodule EpmdUp do
         spawn(fn -> launch_epmd(epmd_cmd) end)
         Logger.info("waiting launching epmd...")
         wait_launching_epmd(5)
+    end
+  end
+
+  defp stop_epmd do
+    case :gen_tcp.connect(~c'localhost', @epmd_port, [:binary, active: false], 1000) do
+      {:ok, socket} ->
+        :gen_tcp.send(socket, @kill_req)
+        Logger.info("waiting terminating epmd...")
+        wait_terminating_epmd(socket, 5)
+
+      {:error, reason} ->
+        Logger.warning("Fail to connect due to #{inspect(reason)}.")
+        {:error, reason}
     end
   end
 
@@ -77,6 +106,27 @@ defmodule EpmdUp do
     else
       Process.sleep(1000)
       wait_launching_epmd(count - 1)
+    end
+  end
+
+  defp wait_terminating_epmd(socket, count) do
+    case :gen_tcp.recv(socket, 2, 5000) do
+      {:ok, "OK"} -> :ok
+      {:ok, v} -> {:error, "Unknown ack #{inspect(v)}"}
+      {:error, reason} -> {:error, reason}
+    end
+
+    wait_terminating_epmd_sub(count)
+  end
+
+  defp wait_terminating_epmd_sub(0), do: {:error, "Fail to terminating epmd."}
+
+  defp wait_terminating_epmd_sub(count) do
+    if active?() do
+      Process.sleep(1000)
+      wait_terminating_epmd_sub(count - 1)
+    else
+      :ok
     end
   end
 end
