@@ -8,4 +8,10 @@ defmodule EpmdUpTest do
       assert r == true || r == false
     end
   end
+
+  describe "find_epmd_executable" do
+    test "succeeds always" do
+      refute EpmdUp.find_epmd_executable() == nil
+    end
+  end
 end

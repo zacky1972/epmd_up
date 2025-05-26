@@ -1,10 +1,16 @@
 # EpmdUp
 
-A simple Elixir module to check if the Erlang Port Mapper Daemon (`epmd`) is running.
+A simple Elixir module to check and manage the Erlang Port Mapper Daemon (`epmd`).
 
 ## Overview
 
-EpmdUp provides functionality to verify the status of `epmd`, which is a critical component in Erlang/Elixir distributed systems. The Erlang Port Mapper Daemon is responsible for tracking which nodes are running on a host and which ports they are using for distributed communication.
+EpmdUp provides functionality to verify the status and location of `epmd`, which is a critical component in Erlang/Elixir distributed systems. The Erlang Port Mapper Daemon is responsible for tracking which nodes are running on a host and which ports they are using for distributed communication.
+
+## Features
+
+  * `active?/0`: Check if `epmd` is active and accepting connections
+  * `find_epmd_executable/0`: Find the full path of the `epmd` executable in the system
+  * Cross-platform support (Linux, macOS, Windows)
 
 ## Installation
 
