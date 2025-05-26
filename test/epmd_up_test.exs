@@ -14,4 +14,15 @@ defmodule EpmdUpTest do
       refute EpmdUp.find_epmd_executable() == nil
     end
   end
+
+  describe "activate, deactivate and active?" do
+    test "activate, deactivate and active?" do
+      assert EpmdUp.activate() == :ok
+      assert EpmdUp.active?()
+      assert EpmdUp.deactivate() == :ok
+      refute EpmdUp.active?()
+      assert EpmdUp.activate() == :ok
+      assert EpmdUp.active?()
+    end
+  end
 end
