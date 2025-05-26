@@ -27,8 +27,8 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            elixir-version: 1.18.4
-            otp-version: 27.3.4
+            elixir-version: '1.18.4'
+            otp-version: '27.3.4'
 
     name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
     runs-on: ${{ matrix.os }}
@@ -64,14 +64,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            elixir-version: 1.17.3
-            otp-version: 27.3.4
+            elixir-version: '1.17.3'
+            otp-version: '27.3.4'
           - os: ubuntu-22.04
-            elixir-version: 1.16.3
-            otp-version: 26.2.5.12
+            elixir-version: '1.16.3'
+            otp-version: '26.2.5.12'
           - os: ubuntu-22.04
-            elixir-version: 1.15.8
-            otp-version: 25.3.2.12
+            elixir-version: '1.15.8'
+            otp-version: '25.3.2.12'
 
     name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
     needs: build-and-test-latest
@@ -100,11 +100,11 @@ jobs:
       matrix:
         include:
           - os: windows-2022
-            elixir-version: 1.18.4
-            otp-version: 27.3.4
+            elixir-version: '1.18.4'
+            otp-version: '27.3.4'
           - os: windows-2019
-            elixir-version: 1.18.4
-            otp-version: 27.3.4
+            elixir-version: '1.18.4'
+            otp-version: '27.3.4'
 
     name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
     needs: build-and-test-latest
