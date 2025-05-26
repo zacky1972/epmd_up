@@ -24,7 +24,7 @@ be found at <https://hexdocs.pm/epmd_up>.
 
 ## Tested Platforms
 
-* Ubuntu 22.04 / Elixir 1.18 / OTP 27
+* Ubuntu 22.04 / Elixir 1.18 / OTP 28
 * Ubuntu 22.04 / Elixir 1.17 / OTP 27
 * Ubuntu 22.04 / Elixir 1.16 / OTP 26
 * Ubuntu 22.04 / Elixir 1.15 / OTP 25
