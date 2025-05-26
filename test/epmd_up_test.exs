@@ -15,8 +15,12 @@ defmodule EpmdUpTest do
     end
   end
 
-  describe "activate and active?" do
-    test "active? after activate" do
+  describe "activate, deactivate and active?" do
+    test "activate, deactivate and active?" do
+      assert EpmdUp.activate() == :ok
+      assert EpmdUp.active?()
+      assert EpmdUp.deactivate() == :ok
+      refute EpmdUp.active?()
       assert EpmdUp.activate() == :ok
       assert EpmdUp.active?()
     end
