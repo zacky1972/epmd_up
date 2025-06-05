@@ -21,7 +21,7 @@ The package can be installed by adding `epmd_up` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:epmd_up, "~> 0.1.0"}
+    {:epmd_up, "~> 1.0"}
   ]
 end
 ```
