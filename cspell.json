@@ -1,0 +1,13 @@
+{
+    "version": "0.2",
+    "ignorePaths": [
+        "_build/**",
+        "deps/**",
+        "doc/dist/**"
+    ],
+    "userWords": [
+        "epmd",
+        "spellweaver",
+        "nstandard"
+    ]
+}

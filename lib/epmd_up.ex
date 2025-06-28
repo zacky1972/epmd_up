@@ -12,7 +12,7 @@ defmodule EpmdUp do
   Starts the Erlang Port Mapper Daemon (`epmd`) if it's not already running.
   """
   @spec activate() :: :ok | {:error, term()}
-  def activate do
+  def activate() do
     case active?() do
       true -> :ok
       _ -> start_epmd()
@@ -31,7 +31,7 @@ defmodule EpmdUp do
     * `false` - if `epmd` is not running or not accepting connections
   """
   @spec active?() :: boolean()
-  def active? do
+  def active?() do
     case :net_adm.names() do
       {:ok, _} -> true
       {:error, _} -> false
@@ -44,7 +44,7 @@ defmodule EpmdUp do
   if it's running
   """
   @spec deactivate() :: :ok | {:error, term()}
-  def deactivate do
+  def deactivate() do
     case active?() do
       false -> :ok
       _ -> stop_epmd()
@@ -57,14 +57,14 @@ defmodule EpmdUp do
   Returns `nil` if the executable cannot be found in the system's PATH.
   """
   @spec find_epmd_executable() :: binary() | nil
-  def find_epmd_executable do
+  def find_epmd_executable() do
     System.find_executable("epmd")
   end
 
-  defp start_epmd do
+  defp start_epmd() do
     case find_epmd_executable() do
       nil ->
-        {:error, "Not found empd"}
+        {:error, "Not found epmd"}
 
       epmd_cmd ->
         spawn(fn -> launch_epmd(epmd_cmd) end)
@@ -73,7 +73,7 @@ defmodule EpmdUp do
     end
   end
 
-  defp stop_epmd do
+  defp stop_epmd() do
     case :gen_tcp.connect(~c'localhost', @epmd_port, [:binary, active: false], 1000) do
       {:ok, socket} ->
         :gen_tcp.send(socket, @kill_req)
