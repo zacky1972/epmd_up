@@ -77,7 +77,7 @@ defmodule EpmdUp.MixProject do
   defp docs do
     [
       main: "EpmdUp",
-      extras: ["README.md", "LICENSE"]
+      extras: ["README.md", "LICENSE.md"]
     ]
   end
 
