@@ -50,12 +50,8 @@ jobs:
       run: mix deps.get
     - name: Check format
       run: mix format --check-formatted --migrate
-    - name: Check by the new type system
-      run: mix compile --all-warnings --warnings-as-errors --no-compile
-    - name: Run tests
-      run: mix test
-    - name: Run Credo
-      run: mix credo --strict
+    - name: Check by nstandard
+      run: mix check
     - name: Check documents
       run: mix docs --warning-as-errors
       
