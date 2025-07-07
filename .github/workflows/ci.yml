@@ -41,7 +41,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Elixir
-      uses: erlef/setup-beam@75edbb82877ab10edeb12a99c3cf2f0909f3dc87
+      uses: erlef/setup-beam@8e7fdef09ffa3ea54328b5000c170a3b9b20ca96
       id: setup-beam
       with:
         elixir-version: ${{ matrix.elixir-version }}
@@ -87,7 +87,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Elixir
-      uses: erlef/setup-beam@75edbb82877ab10edeb12a99c3cf2f0909f3dc87
+      uses: erlef/setup-beam@8e7fdef09ffa3ea54328b5000c170a3b9b20ca96
       id: setup-beam
       with:
         elixir-version: ${{ matrix.elixir-version }}
@@ -120,7 +120,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Elixir
-      uses: erlef/setup-beam@75edbb82877ab10edeb12a99c3cf2f0909f3dc87
+      uses: erlef/setup-beam@8e7fdef09ffa3ea54328b5000c170a3b9b20ca96
       id: setup-beam-windows
       with:
         elixir-version: ${{ matrix.elixir-version }}
