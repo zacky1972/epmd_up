@@ -129,3 +129,39 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+
+  build-and-test-macos:
+    strategy:
+      matrix:
+        include:
+          - os: macos-14-xlarge
+            elixir-version: '1.18.4'
+            otp-version: '28.0.1'
+
+    name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
+    needs: build-and-test-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Elixir
+      uses: jdx/mise-action@v2
+      with:
+        version: '2025.7.2'
+        install: true
+        cache: true
+        experimental: true
+        log_level: debug
+        tool_versions: |
+            erlang: ${{ matrix.otp-version }}
+            elixir: ${{ matrix.elixir-version }}
+
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run tests
+      run: mix test
