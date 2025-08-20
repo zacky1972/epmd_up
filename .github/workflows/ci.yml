@@ -150,7 +150,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Elixir
-      uses: jdx/mise-action@v2
+      uses: jdx/mise-action@v3
       with:
         version: '2025.7.2'
         install: true
