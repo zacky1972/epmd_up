@@ -38,7 +38,9 @@ be found at <https://hexdocs.pm/epmd_up>.
 * Ubuntu 22.04 / Elixir 1.17 / OTP 27
 * Ubuntu 22.04 / Elixir 1.16 / OTP 26
 * Ubuntu 22.04 / Elixir 1.15 / OTP 26
+* Windows 2025 / Elixir 1.19 / OTP 28
 * Windows 2022 / Elixir 1.19 / OTP 28
+* Windows 2025 / Elixir 1.18 / OTP 28
 * Windows 2022 / Elixir 1.18 / OTP 28
 * macOS Sonoma on Apple Silicon / Elixir 1.18 / OTP 28
 

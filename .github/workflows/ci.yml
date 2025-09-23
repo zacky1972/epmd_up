@@ -107,6 +107,12 @@ jobs:
           - os: windows-2022
             elixir-version: '1.18.4'
             otp-version: '28.1'
+          - os: windows-2025
+            elixir-version: '1.19.0-rc.0'
+            otp-version: '28.1'
+          - os: windows-2025
+            elixir-version: '1.18.4'
+            otp-version: '28.1'
 
     name: Build and test on ${{ matrix.os }} ${{ matrix.elixir-version }} ${{ matrix.otp-version }}
     needs: build-and-test-latest
