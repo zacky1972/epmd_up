@@ -6,7 +6,7 @@ defmodule EpmdUp.MixProject do
   def project do
     [
       app: :epmd_up,
-      version: "1.0.3",
+      version: "1.0.4",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -35,7 +35,7 @@ defmodule EpmdUp.MixProject do
     [
       name: :epmd_up,
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/TODO/epmd_up"}
+      links: %{"GitHub" => "https://github.com/zacky1972/epmd_up"}
     ]
   end
 
