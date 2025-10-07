@@ -60,7 +60,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            elixir-version: '1.19.0-rc.0'
+            elixir-version: '1.19.0-rc.2'
             otp-version: '28.1'
           - os: ubuntu-22.04
             elixir-version: '1.18.4'
@@ -102,7 +102,7 @@ jobs:
       matrix:
         include:
           - os: windows-2022
-            elixir-version: '1.19.0-rc.0'
+            elixir-version: '1.19.0-rc.2'
             otp-version: '28.1'
           - os: windows-2022
             elixir-version: '1.18.4'
